@@ -1,0 +1,76 @@
+#pragma once
+
+#include "driver/gpio.h"
+#include "driver/i2c_types.h"
+#include "driver/uart.h"
+
+/* First user setting: final heading correction, clockwise positive. */
+#define APP_SENSOR_ANGLE_OFFSET_DEG 180.0f
+
+/* Board wiring. */
+#define APP_I2C_PORT I2C_NUM_0
+#define APP_I2C_SDA_GPIO GPIO_NUM_1
+#define APP_I2C_SCL_GPIO GPIO_NUM_2
+#define APP_GPS_UART_PORT UART_NUM_2
+#define APP_GPS_TX_GPIO GPIO_NUM_3
+#define APP_GPS_RX_GPIO GPIO_NUM_4
+#define APP_MODE_BUTTON_GPIO GPIO_NUM_5
+#define APP_WS2812_GPIO GPIO_NUM_6
+
+/* First-boot fallback; a valid NVS target from the Wi-Fi page overrides it. */
+#define APP_TARGET_LATITUDE_DEG 39.908722f
+#define APP_TARGET_LONGITUDE_DEG 116.397499f
+
+/* Local-only WPA2 configuration portal at http://192.168.4.1. */
+#define APP_CONFIG_AP_SSID_PREFIX "MCCompass"
+#define APP_CONFIG_AP_PASSWORD "compass123"
+#define APP_CONFIG_AP_CHANNEL 6U
+#define APP_CONFIG_AP_MAX_CLIENTS 2U
+#define APP_CONFIG_HTTP_BODY_MAX_BYTES 3072U
+#define APP_CONFIG_CREDENTIALS_DISPLAY_MS 5000U
+
+/*
+ * HMC5883L reports magnetic north. Set local east-positive declination here
+ * when target bearings or true north must be exact. Zero keeps this first
+ * build independent of a magnetic-field model.
+ */
+#define APP_MAGNETIC_DECLINATION_DEG 0.0f
+
+#define APP_GPS_BAUD_RATE 9600
+#define APP_GPS_FIX_MAX_AGE_US (3LL * 1000LL * 1000LL)
+#define APP_GPS_LINE_MAX_LENGTH 128U
+
+#define APP_MAG_SAMPLE_PERIOD_MS 20U
+#define APP_MAG_STALE_AFTER_US (500LL * 1000LL)
+#define APP_MAG_MAX_ABS_MG 3500.0f
+
+#define APP_MODE_BUTTON_DEBOUNCE_MS 40U
+#define APP_DEFAULT_MODE APP_MODE_NORTH
+
+#define APP_COMPASS_ANGLE_HYSTERESIS_DEG 1.5f
+#define APP_HEADING_FILTER_ALPHA 0.18f
+
+#define APP_WS2812_RMT_RESOLUTION_HZ (10U * 1000U * 1000U)
+#define APP_WS2812_BRIGHTNESS_PERCENT 30U
+
+/* Background two-dimensional ellipse calibration. */
+#define APP_CALIBRATION_SAMPLE_CAPACITY 720U
+#define APP_CALIBRATION_MIN_SAMPLES 240U
+#define APP_CALIBRATION_EVALUATION_STEP 40U
+#define APP_CALIBRATION_MIN_WINDOW_US (12LL * 1000LL * 1000LL)
+#define APP_CALIBRATION_MAX_WINDOW_US (120LL * 1000LL * 1000LL)
+#define APP_CALIBRATION_MIN_SAMPLE_DELTA_MG 2.0f
+#define APP_CALIBRATION_MIN_FIELD_MG 80.0f
+#define APP_CALIBRATION_MAX_FIELD_MG 1800.0f
+#define APP_CALIBRATION_MIN_AXIS_SPAN_MG 80.0f
+#define APP_CALIBRATION_ANGLE_BINS 24U
+#define APP_CALIBRATION_MIN_OCCUPIED_BINS 20U
+#define APP_CALIBRATION_MAX_EMPTY_BINS 4U
+#define APP_CALIBRATION_MIN_INLIER_RATIO 0.80f
+#define APP_CALIBRATION_MAX_AXIS_RATIO 4.0f
+#define APP_CALIBRATION_MAX_RADIAL_CV 0.20f
+#define APP_CALIBRATION_CONFIDENCE_THRESHOLD 0.82f
+#define APP_CALIBRATION_REQUIRED_STABLE_FITS 3U
+#define APP_CALIBRATION_OFFSET_AGREEMENT_FRACTION 0.08f
+#define APP_CALIBRATION_MATRIX_AGREEMENT 0.15f
+#define APP_CALIBRATION_MIN_SAVE_INTERVAL_US (5LL * 60LL * 1000LL * 1000LL)

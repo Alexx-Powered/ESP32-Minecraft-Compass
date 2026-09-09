@@ -1,0 +1,82 @@
+# ESP-IDF, host tests, and browser test outputs
+build/
+build-*/
+cmake-build-*/
+*.o
+*.obj
+*.a
+*.lib
+*.out
+*.exe
+*.bin
+*.elf
+*.map
+*.pdb
+*.ilk
+/flasher_args.json
+/flash_args
+
+# Generated configuration; commit sdkconfig.defaults instead
+sdkconfig
+sdkconfig.old
+sdkconfig.*.old
+
+# Downloaded dependencies and local ESP-IDF tools
+# Keep dependencies.lock and the patched components/hmc5883l driver tracked.
+managed_components/
+components/.idf/
+.espressif/
+
+# CMake and language-server caches
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+CTestTestfile.cmake
+compile_commands.json
+.cache/
+.ccls-cache/
+
+# Machine-specific editor settings (paths, toolchains, and serial ports)
+.vscode/
+.idea/
+*.user
+*.suo
+*.sln.docstates
+*.code-workspace
+
+# Python and Node.js environments/caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+venv/
+.venv/
+env/
+node_modules/
+
+# Local environment secrets; retain shareable examples
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Temporary files, logs, and Office lock files
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+~$*
+
+# OS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+.directory
+Thumbs.db
+ehthumbs.db
+Desktop.ini

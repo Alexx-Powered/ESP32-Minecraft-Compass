@@ -1,0 +1,11 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "示例目标",
+    "coordinateSystem": "WGS84"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [116.34, 39.98]
+  }
+}

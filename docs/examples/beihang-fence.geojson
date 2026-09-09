@@ -1,0 +1,25 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "北京航空航天大学(学院路校区)围栏",
+    "source": "manual-drawing",
+    "mapProvider": "AMap",
+    "coordinateSystem": "WGS84",
+    "sourceCoordinateSystem": "GCJ-02",
+    "coordinateConversion": "approximate GCJ-02 to WGS84",
+    "areaSquareMeters": 1043871.46
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [[
+      [116.3346721, 39.9846008],
+      [116.3352717, 39.9771839],
+      [116.3383118, 39.9772772],
+      [116.3393615, 39.9767162],
+      [116.3395113, 39.975302],
+      [116.3475407, 39.9752544],
+      [116.3471533, 39.9851037],
+      [116.3346721, 39.9846008]
+    ]]
+  }
+}

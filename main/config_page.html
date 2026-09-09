@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#173f35">
+  <title>MinecraftCompass 配置</title>
+  <style>
+    :root{color-scheme:light;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#183b31;background:#f1f4ef;--green:#173f35;--muted:#66756d;--line:#dce4dc;--error:#a82e2e}
+    *{box-sizing:border-box}body{margin:0}button,input,textarea{font:inherit}button{cursor:pointer;touch-action:manipulation}button:disabled{cursor:wait;opacity:.6}[hidden]{display:none!important}
+    .hero{background:var(--green);color:#fff;padding:24px max(18px,calc((100% - 660px)/2)) 21px}.brand{display:flex;gap:12px;align-items:center}.mark{width:42px;height:42px;flex:none;color:#c4ed91}.brand small{display:block;color:#c4d7cb;font-size:12px;margin-bottom:4px;letter-spacing:.08em}h1{font-size:23px;margin:0}.hero p{font-size:14px;line-height:1.6;color:#d9e6dd;margin:14px 0 0}
+    main{max-width:696px;margin:0 auto;padding:16px 16px calc(28px + env(safe-area-inset-bottom))}.connection{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:0 2px 14px;font-size:13px;color:var(--muted)}#ssid{overflow-wrap:anywhere}.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:650;border-radius:30px;padding:6px 10px;white-space:nowrap;background:#e1e9df;color:#4c6357}.badge.good{background:#e1f1dc;color:#2c6332}.badge.bad{background:#fae6df;color:#9f4329}.dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+    .tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:5px;background:#e3e9e0;border-radius:15px;margin-bottom:16px;position:sticky;top:8px;z-index:2;box-shadow:0 2px 12px #183b3110}.tabs button{border:0;border-radius:11px;background:transparent;color:#5a6e60;min-height:48px;font-size:15px;font-weight:650}.tabs button[aria-selected="true"]{background:#fff;color:var(--green);box-shadow:0 2px 5px #183b3114}
+    .panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:21px;box-shadow:0 10px 30px #173f3505}.heading{display:flex;align-items:center;justify-content:space-between;gap:8px}h2{font-size:21px;margin:0}.subtitle{font-size:14px;color:var(--muted);line-height:1.65;margin:8px 0 17px}.current{border:1px solid var(--line);background:#f7f9f4;border-radius:13px;padding:13px 14px;margin-bottom:19px}.current small{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}.current p{font-size:14px;line-height:1.6;overflow-wrap:anywhere;margin:0}
+    .methods{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:4px;margin-bottom:19px;background:#f0f3ed;border-radius:12px}.methods button{border:0;border-radius:9px;background:transparent;min-height:46px;color:#5c6b61;font-size:14px;font-weight:650}.methods button[aria-selected="true"]{background:var(--green);color:white}
+    .field{margin-bottom:15px}label{display:block;font-size:15px;font-weight:600;margin-bottom:8px}.optional{font-size:12px;color:var(--muted);font-weight:400}.coord{display:grid;grid-template-columns:1fr 1fr;gap:13px}input,textarea{width:100%;min-width:0;border:1px solid #cdd8cb;border-radius:11px;background:#fcfdfa;color:#17382e;outline:none;font-size:16px}input{min-height:52px;padding:12px}textarea{display:block;min-height:210px;resize:vertical;padding:13px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:16px;line-height:1.6;overflow-wrap:anywhere}input:focus,textarea:focus{border-color:#37784e;box-shadow:0 0 0 3px #397d5319}input[aria-invalid="true"]{border-color:var(--error)}:focus-visible{outline:3px solid #6cab77;outline-offset:3px}
+    .helper{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;font-size:12px;line-height:1.6;color:var(--muted);margin:8px 0 0}.helper span:last-child{flex-shrink:0}.hint{font-size:13px;line-height:1.7;color:var(--muted);margin:8px 0 16px}.preview{border:1px dashed #cddccc;background:#f9fbf6;border-radius:12px;padding:12px;margin:14px 0;font-size:14px;line-height:1.7;overflow-wrap:anywhere}.preview.error{border-color:#e6b5ad;color:var(--error);background:#fff7f4}.preview svg{display:block;width:100%;height:132px;margin-top:8px;border-radius:8px;background:#eff4e9}.preview small{display:block;font-size:11px;color:var(--muted);margin-top:3px}.outline{stroke:#35734d;stroke-width:2;fill:#9bc77d44;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .apply{width:100%;min-height:54px;margin-top:5px;border:0;border-radius:12px;background:var(--green);color:#fff;font-size:16px;font-weight:650;box-shadow:0 3px 0 #102f27}.apply:active{transform:translateY(1px);box-shadow:0 1px 0 #102f27}.message{margin:15px 0 0;font-size:14px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}.message:empty{display:none}.message.success{background:#edf7e8;color:#2d643a;border-radius:10px;padding:12px}.message.error{background:#fff0ec;color:var(--error);border-radius:10px;padding:12px}.message.progress{color:#245e40}.footer{text-align:center;color:var(--muted);font-size:12px;line-height:1.8;margin:18px 0 0}
+    @media(max-width:420px){main{padding-left:12px;padding-right:12px}.panel{padding:17px}.coord{grid-template-columns:1fr;gap:0}.hero{padding-top:20px}h1{font-size:21px}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="brand"><svg class="mark" viewBox="0 0 44 44" aria-hidden="true"><rect x="3" y="3" width="38" height="38" rx="11" fill="none" stroke="currentColor" opacity=".5"/><path d="M29 11 25 25 11 30 16 16Z" fill="#c4ed91"/><path d="M29 11 25 25 21 21Z" fill="#fff"/><circle cx="21" cy="21" r="2" fill="#173f35"/></svg><div><small>MINECRAFT COMPASS</small><h1>指南针设置</h1></div></div>
+    <p>选好目标或围栏，点击应用即可生效。</p>
+  </header>
+  <main>
+    <div class="connection"><span id="ssid">正在连接设备…</span><span class="badge" id="connection-status" role="status"><span class="dot"></span><span id="connection-text">连接中</span></span></div>
+    <nav class="tabs" role="tablist" aria-label="选择配置项目">
+      <button type="button" id="tab-target" role="tab" aria-controls="panel-target" aria-selected="true" data-tab="target">Target</button>
+      <button type="button" id="tab-fence1" role="tab" aria-controls="panel-fence1" aria-selected="false" tabindex="-1" data-tab="fence1">围栏 1</button>
+      <button type="button" id="tab-fence2" role="tab" aria-controls="panel-fence2" aria-selected="false" tabindex="-1" data-tab="fence2">围栏 2</button>
+    </nav>
+    <section class="panel" id="panel-target" role="tabpanel" aria-labelledby="tab-target">
+      <div class="heading"><h2>指向目标</h2><span class="badge" id="gps-status">GPS 读取中</span></div>
+      <p class="subtitle">设置指南针在 Target 模式下指向的位置。</p>
+      <div class="current"><small>设备当前目标</small><p id="target-current">正在读取…</p></div>
+      <div class="methods" role="tablist" aria-label="目标输入方式">
+        <button type="button" id="method-manual" role="tab" aria-controls="target-manual" aria-selected="true" data-method="manual">输入坐标</button>
+        <button type="button" id="method-json" role="tab" aria-controls="target-import" aria-selected="false" tabindex="-1" data-method="json">粘贴 GeoJSON</button>
+      </div>
+      <form id="target-manual" role="tabpanel" aria-labelledby="method-manual" novalidate>
+        <div class="field"><label for="target-name">目标名称 <span class="optional">选填</span></label><input id="target-name" type="text" maxlength="128" placeholder="例如：目的地、家" autocomplete="off"></div>
+        <div class="coord">
+          <div class="field"><label for="target-lon">经度</label><input id="target-lon" type="text" inputmode="decimal" placeholder="例如 116.3374289" autocomplete="off" spellcheck="false" aria-describedby="coord-hint"></div>
+          <div class="field"><label for="target-lat">纬度</label><input id="target-lat" type="text" inputmode="decimal" placeholder="例如 39.9762859" autocomplete="off" spellcheck="false" aria-describedby="coord-hint"></div>
+        </div>
+        <p class="hint" id="coord-hint">请输入 WGS84 坐标。经度 −180～180，纬度 −90～90。</p>
+        <button type="submit" class="apply" data-save="target">应用目标坐标</button>
+      </form>
+      <form id="target-import" role="tabpanel" aria-labelledby="method-json" hidden novalidate>
+        <label for="target-json">Target GeoJSON</label>
+        <textarea id="target-json" placeholder="在此长按，粘贴完整的 Target GeoJSON…" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="target-json-hint"></textarea>
+        <div class="helper" id="target-json-hint"><span>WGS84 · Point 点坐标</span><span id="target-bytes">0 / 3072 字节</span></div>
+        <div id="target-preview" class="preview" role="status" hidden><span id="target-preview-text"></span></div>
+        <button type="submit" class="apply" data-save="target">应用 Target GeoJSON</button>
+      </form>
+      <p class="message" id="target-message" role="status" aria-live="polite"></p>
+    </section>
+    <section class="panel" id="panel-fence1" role="tabpanel" aria-labelledby="tab-fence1" hidden>
+      <div class="heading"><h2>电子围栏 1</h2><span class="badge" id="fence1-status">读取中</span></div>
+      <p class="subtitle">粘贴地图网站生成的多边形围栏 GeoJSON。</p>
+      <div class="current"><small>设备当前围栏</small><p id="fence1-current">正在读取…</p></div>
+      <form id="fence1-import" novalidate>
+        <label for="fence1-json">围栏 GeoJSON</label>
+        <textarea id="fence1-json" placeholder="在此长按，粘贴完整的多边形围栏 GeoJSON…" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="fence1-hint"></textarea>
+        <div class="helper" id="fence1-hint"><span>WGS84 · Polygon · 3–16 个顶点</span><span id="fence1-bytes">0 / 3072 字节</span></div>
+        <div id="fence1-preview" class="preview" role="status" hidden><span id="fence1-preview-text"></span><svg id="fence1-shape" viewBox="0 0 320 132" role="img" aria-label="围栏 1 轮廓预览" hidden><path id="fence1-outline" class="outline"/><path d="M299 24v-12m-4 5 4-5 4 5" fill="none" stroke="#66756d"/><text x="295" y="36" fill="#66756d" font-size="10">N</text></svg><small id="fence1-caption" hidden>轮廓预览（非地图）· 上方为北</small></div>
+        <button type="submit" class="apply" data-save="fence1">应用围栏 1</button>
+      </form>
+      <p class="message" id="fence1-message" role="status" aria-live="polite"></p>
+    </section>
+    <section class="panel" id="panel-fence2" role="tabpanel" aria-labelledby="tab-fence2" hidden>
+      <div class="heading"><h2>电子围栏 2</h2><span class="badge" id="fence2-status">读取中</span></div>
+      <p class="subtitle">与围栏 1 独立，应用时只更新当前围栏。</p>
+      <div class="current"><small>设备当前围栏</small><p id="fence2-current">正在读取…</p></div>
+      <form id="fence2-import" novalidate>
+        <label for="fence2-json">围栏 GeoJSON</label>
+        <textarea id="fence2-json" placeholder="在此长按，粘贴完整的多边形围栏 GeoJSON…" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="fence2-hint"></textarea>
+        <div class="helper" id="fence2-hint"><span>WGS84 · Polygon · 3–16 个顶点</span><span id="fence2-bytes">0 / 3072 字节</span></div>
+        <div id="fence2-preview" class="preview" role="status" hidden><span id="fence2-preview-text"></span><svg id="fence2-shape" viewBox="0 0 320 132" role="img" aria-label="围栏 2 轮廓预览" hidden><path id="fence2-outline" class="outline"/><path d="M299 24v-12m-4 5 4-5 4 5" fill="none" stroke="#66756d"/><text x="295" y="36" fill="#66756d" font-size="10">N</text></svg><small id="fence2-caption" hidden>轮廓预览（非地图）· 上方为北</small></div>
+        <button type="submit" class="apply" data-save="fence2">应用围栏 2</button>
+      </form>
+      <p class="message" id="fence2-message" role="status" aria-live="polite"></p>
+    </section>
+    <p class="footer">应用成功后自动保存，断电重启仍可使用。<br>只需连接设备热点，无需互联网。</p>
+  </main>
+  <script>
+    'use strict';
+    const $=id=>document.getElementById(id);
+    const slots={target:{url:'/api/v1/target',label:'Target',edits:0},fence1:{url:'/api/v1/fence/1',label:'围栏 1',edits:0},fence2:{url:'/api/v1/fence/2',label:'围栏 2',edits:0}};
+    const bytes=text=>new TextEncoder().encode(text).length;
+    const object=value=>value!==null&&typeof value==='object'&&!Array.isArray(value);
+    const finite=(value,min,max)=>typeof value==='number'&&Number.isFinite(value)&&value>=min&&value<=max;
+    const owns=(value,key)=>Object.prototype.hasOwnProperty.call(value,key);
+    let saving=false,requestTail=Promise.resolve();
+    function note(slot,text,kind=''){const el=$(slot+'-message');el.textContent=text;el.className='message '+kind;}
+    function badge(id,text,kind=''){const el=$(id);el.textContent=text;el.className='badge '+kind;}
+    function connected(ok){$('connection-text').textContent=ok?'设备已连接':'连接中断';$('connection-status').className='badge '+(ok?'good':'bad');}
+    function selectTab(slot){for(const key of Object.keys(slots)){const active=key===slot,tab=$('tab-'+key);tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;$('panel-'+key).hidden=!active;}}
+    function selectMethod(method){
+      for(const key of ['manual','json']){const active=key===method,tab=$('method-'+key);tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;}
+      $('target-manual').hidden=method!=='manual';$('target-import').hidden=method!=='json';
+    }
+    document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>selectTab(b.dataset.tab)));
+    document.querySelectorAll('[data-method]').forEach(b=>b.addEventListener('click',()=>selectMethod(b.dataset.method)));
+    document.querySelectorAll('[role="tablist"]').forEach(list=>list.addEventListener('keydown',event=>{
+      if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+      const buttons=Array.from(list.querySelectorAll('[role="tab"]'));let i=buttons.indexOf(document.activeElement);if(i<0)return;
+      i=event.key==='Home'?0:event.key==='End'?buttons.length-1:(i+(event.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;
+      event.preventDefault();buttons[i].click();buttons[i].focus();
+    }));
+    function position(point){
+      if(!Array.isArray(point)||![2,3].includes(point.length)||!finite(point[0],-180,180)||!finite(point[1],-90,90)||(point.length===3&&!Number.isFinite(point[2])))
+        throw new Error('坐标须为 [经度, 纬度]：经度 −180～180，纬度 −90～90。');
+    }
+    function validate(slot,feature){
+      if(!object(feature)||feature.type!=='Feature')throw new Error('请粘贴完整 GeoJSON Feature，不能只粘贴坐标或 FeatureCollection。');
+      if(owns(feature,'crs'))throw new Error('请导出 WGS84 GeoJSON，去除旧 crs 字段；仅改标签不能转换坐标。');
+      if(owns(feature,'id')&&typeof feature.id!=='string'&&!Number.isFinite(feature.id))throw new Error('GeoJSON id 须为字符串或数字。');
+      if(!owns(feature,'properties')||(feature.properties!==null&&!object(feature.properties)))throw new Error('GeoJSON 缺少合法的 properties 对象。');
+      const p=feature.properties||{};
+      if(owns(p,'coordinateSystem')&&p.coordinateSystem!=='WGS84')throw new Error('只接收已经转换为 WGS84 的坐标。');
+      if(owns(p,'enabled')&&typeof p.enabled!=='boolean')throw new Error('enabled 只能是 true 或 false。');
+      if(p.name!==undefined&&p.name!==null&&typeof p.name!=='string')throw new Error('名称必须是文本。');
+      const enabled=p.enabled!==false,name=p.name==null?slots[slot].label:p.name;
+      if(bytes(name)>128||(enabled&&name.length===0))throw new Error('名称启用时不能为空，且最多 128 个 UTF-8 字节。');
+      if(slot==='target'&&owns(p,'role')&&p.role!=='Target')throw new Error('Target 的 role 字段须为 "Target"。');
+      if(feature.geometry===null&&!enabled)return {name,enabled,point:null,ring:null};
+      const g=feature.geometry;
+      if(!object(g)||g.type!==(slot==='target'?'Point':'Polygon'))throw new Error(slot==='target'?'目标需使用 Point 类型。':'围栏需使用 Polygon 类型，不支持 MultiPolygon。');
+      if(slot==='target'){position(g.coordinates);return {name,enabled,point:g.coordinates,ring:null};}
+      if(!Array.isArray(g.coordinates)||g.coordinates.length!==1)throw new Error('只支持一个外环，不支持带内洞的多边形。');
+      const ring=g.coordinates[0];
+      if(!Array.isArray(ring)||ring.length<4||ring.length>17)throw new Error('围栏须有 3–16 个顶点，并在末尾重复首点闭合。');
+      ring.forEach(position);const first=ring[0],last=ring[ring.length-1];
+      if(first.length!==last.length||first.some((n,i)=>n!==last[i]))throw new Error('围栏未闭合：最后一个位置须与第一个位置完全一致。');
+      const points=ring.slice(0,-1),lons=points.map(p=>p[0]),lats=points.map(p=>p[1]);
+      const dx=Math.max(...lons)-Math.min(...lons),dy=Math.max(...lats)-Math.min(...lats);
+      if(dx===0||dy===0)throw new Error('围栏必须有面积。');
+      if(dx>2||dy>2)throw new Error('围栏的经纬度跨度均不能超过 2°。');
+      return {name,enabled,point:null,ring};
+    }
+    function parse(slot,raw){
+      if(!raw.trim())throw new Error('请先长按输入框，粘贴 GeoJSON。');
+      if(bytes(raw)>3072)throw new Error('GeoJSON 超过 3072 字节，请在生成网站精简输出后重试。');
+      let feature;try{feature=JSON.parse(raw);}catch{throw new Error('JSON 语法有误，请粘贴完整内容并检查逗号和引号。');}
+      return validate(slot,feature);
+    }
+    function summary(info){
+      if(!info.enabled)return (info.name||'当前配置')+' · 已禁用';
+      if(info.point)return info.name+' · 经度 '+info.point[0].toFixed(6)+'，纬度 '+info.point[1].toFixed(6);
+      return info.name+' · '+(info.ring.length-1)+' 个顶点 · WGS84';
+    }
+    function preview(slot){
+      const raw=$(slot+'-json').value,box=$(slot+'-preview');$(slot+'-bytes').textContent=bytes(raw)+' / 3072 字节';box.hidden=!raw.trim();box.className='preview';
+      if(slot!=='target'){$(slot+'-shape').setAttribute('hidden','');$(slot+'-caption').hidden=true;}
+      if(box.hidden)return;
+      try{
+        const info=parse(slot,raw);$(slot+'-preview-text').textContent=summary(info);
+        if(info.ring){
+          const lons=info.ring.map(p=>p[0]),lats=info.ring.map(p=>p[1]),west=Math.min(...lons),south=Math.min(...lats),east=Math.max(...lons),north=Math.max(...lats);
+          const aspect=Math.max(.001,Math.cos((north+south)/2*Math.PI/180)),width=(east-west)*aspect,height=north-south,scale=Math.min(260/width,100/height);
+          const path=info.ring.map((p,i)=>(i?'L':'M')+(160+((p[0]-west)*aspect-width/2)*scale).toFixed(2)+' '+(66-((p[1]-south)-height/2)*scale).toFixed(2)).join(' ')+' Z';
+          $(slot+'-outline').setAttribute('d',path);$(slot+'-shape').removeAttribute('hidden');$(slot+'-caption').hidden=false;
+        }
+      }catch(error){box.className='preview error';$(slot+'-preview-text').textContent=error.message;}
+    }
+    function formTarget(){
+      const number=(id,min,max,label)=>{const field=$(id),raw=field.value.trim(),value=Number(raw);if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(raw)||!finite(value,min,max)){field.setAttribute('aria-invalid','true');field.focus();throw new Error('请输入合法'+label+'（'+min+'～'+max+'）。');}return value;};
+      const lon=number('target-lon',-180,180,'经度'),lat=number('target-lat',-90,90,'纬度');
+      return {type:'Feature',properties:{name:$('target-name').value.trim()||'Target',role:'Target',enabled:true,coordinateSystem:'WGS84'},geometry:{type:'Point',coordinates:[lon,lat]}};
+    }
+    function populate(slot,feature,fillImport=true){
+      $(slot+'-json').value=fillImport?JSON.stringify(feature,null,2):'';preview(slot);
+      if(slot==='target'){$('target-name').value=feature.properties?.name||'';const point=feature.geometry?.coordinates;$('target-lon').value=point?point[0]:'';$('target-lat').value=point?point[1]:'';}
+    }
+    function edited(slot){slots[slot].edits++;note(slot,'有待应用的修改。');}
+    for(const slot of Object.keys(slots)){let timer;$(slot+'-json').addEventListener('input',()=>{edited(slot);clearTimeout(timer);timer=setTimeout(()=>preview(slot),180);});}
+    for(const id of ['target-name','target-lon','target-lat'])$(id).addEventListener('input',()=>{$(id).removeAttribute('aria-invalid');edited('target');});
+    const errorMessages={LEGACY_CRS:'设备保存的是旧 GCJ02 配置，请重新输入 WGS84 坐标或粘贴 WGS84 GeoJSON。',NVS_WRITE:'设备未能保存配置，原配置继续生效，请稍后重试。',JSON_DUPLICATE_FIELD:'JSON 含重复字段，请修改后重试。',DUPLICATE_VERTEX:'围栏包含重复顶点（或精度取整后重合），请修改后重试。',POLYGON_SELF_INTERSECTION:'围栏边线相交，请在地图网站调整轮廓。',POLYGON_AREA:'围栏面积为零，请重新绘制。',BODY_SIZE:'GeoJSON 太长，请精简到 3072 字节以内。',GEOJSON_CRS:'请使用已经转换为 WGS84 的 GeoJSON。',JSON_SYNTAX:'JSON 内容无效，或嵌套过深，请重新导出。',ORIGIN_REJECTED:'请连接设备热点，并通过 http://192.168.4.1 打开页面。'};
+    // Serialize requests for the ESP32's single HTTP worker. Polling updates
+    // status only; it never overwrites unsaved user input.
+    function api(url,options={}){
+      const task=requestTail.then(async()=>{
+        const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);
+        try{
+          const response=await fetch(url,{cache:'no-store',...options,signal:controller.signal});let data;
+          try{data=await response.json();}catch{throw new Error(options.method==='PUT'?'设备返回内容异常，保存结果未确认。请刷新确认。':'设备返回了无法读取的内容。');}
+          connected(true);
+          if(!response.ok||data.ok===false){const e=data.error||{};throw new Error(errorMessages[e.code]||((e.path?e.path+'：':'')+(e.message||'设备拒绝了此配置。')));}
+          return data;
+        }catch(error){
+          if(error.name==='AbortError'||error instanceof TypeError){connected(false);throw new Error(options.method==='PUT'?'应用结果未确认，设备可能已经保存。请检查 Wi-Fi 后刷新确认。':'连接失败，请确认已连接设备热点。');}
+          throw error;
+        }finally{clearTimeout(timer);}
+      });requestTail=task.catch(()=>{});return task;
+    }
+    async function loadSlot(slot){
+      try{const feature=await api(slots[slot].url),info=validate(slot,feature);$(slot+'-current').textContent=summary(info);
+        // A delayed initial GET must not erase a draft that was already typed.
+        if(slots[slot].edits===0)populate(slot,feature,false);
+      }catch(error){$(slot+'-current').textContent='暂未读取到当前配置';if(slots[slot].edits===0)note(slot,error.message,'error');}
+    }
+    async function save(slot,manual){
+      if(saving)return;
+      let raw;try{raw=manual?JSON.stringify(formTarget()):$(slot+'-json').value;parse(slot,raw);}catch(error){note(slot,error.message,'error');return;}
+      saving=true;const controls=document.querySelectorAll('input,textarea,[data-save]');controls.forEach(el=>el.disabled=true);
+      note(slot,'正在应用，请稍候…','progress');const buttons=document.querySelectorAll('[data-save="'+slot+'"]');buttons.forEach(button=>{button.dataset.label=button.textContent;button.textContent='正在应用…';});
+      try{
+        // Keep pasted text verbatim: re-stringifying JSON.parse's result would
+        // hide duplicate keys that the firmware must be able to reject.
+        const feature=await api(slots[slot].url,{method:'PUT',headers:{'Content-Type':'application/geo+json'},body:raw});
+        const info=validate(slot,feature);$(slot+'-current').textContent=summary(info);populate(slot,feature);note(slot,'已应用，断电重启后仍有效。','success');void loadStatus();
+      }catch(error){note(slot,error.message,'error');}
+      finally{saving=false;controls.forEach(el=>el.disabled=false);buttons.forEach(button=>button.textContent=button.dataset.label);}
+    }
+    $('target-manual').addEventListener('submit',event=>{event.preventDefault();save('target',true);});
+    for(const slot of Object.keys(slots))$(slot==='target'?'target-import':slot+'-import').addEventListener('submit',event=>{event.preventDefault();save(slot,false);});
+    async function loadStatus(){
+      try{const s=await api('/api/v1/status');$('ssid').textContent=s.ssid||'设备热点';badge('gps-status',s.gpsValid?'GPS 已定位':'GPS 等待定位',s.gpsValid?'good':'');
+        const names={unconfigured:'未配置',disabled:'已禁用',inside:'围栏内',outside:'围栏外',unknown:'等待定位'};
+        for(const f of s.fences||[])if(f.id==='fence1'||f.id==='fence2')badge(f.id+'-status',names[f.state]||'状态未知',f.state==='inside'?'good':f.state==='outside'?'bad':'');
+      }catch{badge('gps-status','状态暂不可用');for(const slot of ['fence1','fence2'])badge(slot+'-status','状态暂不可用');}
+    }
+    async function poll(){if(!document.hidden&&!saving)await loadStatus();setTimeout(poll,5000);}
+    async function start(){await loadStatus();for(const slot of Object.keys(slots))await loadSlot(slot);setTimeout(poll,5000);}
+    start();
+  </script>
+</body>
+</html>
